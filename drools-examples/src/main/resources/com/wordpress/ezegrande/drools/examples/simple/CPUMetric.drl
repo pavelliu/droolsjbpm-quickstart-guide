@@ -1,0 +1,16 @@
+package com.wordpress.ezegrande.drools.examples.simple;
+
+import com.wordpress.ezegrande.drools.examples.model.PaymentMethod;
+import com.wordpress.ezegrande.drools.examples.model.Purchase;
+
+global org.slf4j.Logger logger;
+ 
+dialect "mvel"
+
+rule "Credit Card purchases have 10% of discount"
+    when
+        $p:Purchase(paymentMethod == PaymentMethod.CREDIT)
+    then
+    	$p.setDiscount(0.1);
+        logger.info("\t==> Executing RULE 'Credit Card purchases have 10% of discount' for Object: " + $p);
+end
